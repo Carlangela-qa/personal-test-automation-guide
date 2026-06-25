@@ -1,0 +1,21 @@
+{
+  "name": "ui-automation-guide",
+  "version": "1.0.0",
+  "description": "This project is an automated testing framework built using [Playwright](https://playwright.dev/), leveraging modern design patterns for reliability and maintainability.",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.61.0",
+    "@types/node": "^25.9.3"
+  },
+  "dependencies": {
+    "csv-parse": "^7.0.0",
+    "dotenv": "^17.4.2",
+    "xlsx": "^0.18.5",
+    "zod": "^4.4.3"
+  }
+}

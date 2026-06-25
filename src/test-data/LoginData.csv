@@ -1,0 +1,4 @@
+email,password,expected,run
+admin@practicesoftwaretesting.com,welcome01,success,yes
+customer@practicesoftwaretesting.com,welcome01,success,yes
+customer2@practicesoftwaretesting.com,welcome02,error,no
