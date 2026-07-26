@@ -37,10 +37,11 @@ export default defineConfig({
   workers: 1,
   //workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [
-    ['html', { outputFolder: 'playwright-report', open: 'never'}],
-    ['json', { outputFile: 'test-results/results.json' }],
-    ],
+  // reporter: [
+  //   ['html', { outputFolder: 'playwright-report', open: 'never'}],
+  //   ['json', { outputFile: 'test-results/results.json' }],
+  //   ],
+  reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -49,38 +50,16 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'off',
     headless: true,
+    screenshot: 'on',
+    video: 'on',
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'api',
-      testDir: './src/tests/API',
-      testMatch: ['**/*.test.ts', '**/*.spec.ts'],
-      use: {
-        baseURL: process.env.url,
-      },
-      // testMatch: /.*\.setup\.ts/,
-      /* Run your local dev server before starting the tests */
-    },
-    {
-      name: 'ui',
-      testDir: './src/tests/UI',
-      testMatch: ['**/*.test.ts', '**/*.spec.ts'],
-      use: {
-        baseURL: process.env.url,
-        headless: true,
-      },
-    },
-    {
-      name: 'scripts',
-      testDir: './scripts',
-      testMatch: ['**/*script.ts'],
-      use: {
-        baseURL: process.env.url,
-        headless: true,
-      },
-    },
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+    }
 
     // {
     //   name: 'firefox',
