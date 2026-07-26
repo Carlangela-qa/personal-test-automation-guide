@@ -1,9 +1,6 @@
 pipeline {
   agent {
-    docker {
-      image 'mcr.microsoft.com/playwright:v1.45.0-focal'
-      args '-u root'
-    }
+    docker { image 'mcr.microsoft.com/playwright:v1.62.0-noble' }
   }
   stages {
     stage('Checkout') {
