@@ -1,33 +1,11 @@
 pipeline {
-  agent any
-
-  stages {
-    stage('Checkout') {
-      steps {
-        git branch: 'main', url: 'https://github.com/Carlangela-qa/personal-test-automation-guide.git'
+   agent { docker { image 'mcr.microsoft.com/playwright:v1.62.0-noble' } }
+   stages {
+      stage('e2e-tests') {
+         steps {
+            sh 'npm ci'
+            sh 'npx playwright test'
+         }
       }
-    }
-
-    stage('Install') {
-      steps {
-        sh 'npm ci'
-      }
-    }
-
-    stage('Test') {
-      steps {
-        sh 'npx playwright test --reporter=html'
-      }
-    }
-
-    stage('Publish Report') {
-      steps {
-        publishHTML(target: [
-          reportDir: 'playwright-report',
-          reportFiles: 'index.html',
-          reportName: 'Playwright Test Report'
-        ])
-      }
-    }
-  }
+   }
 }
