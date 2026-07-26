@@ -13,7 +13,7 @@ export async function getProducts(request: APIRequestContext): Promise<any> {
     const data = await response.json();
     return data;
 
-    //test7
+    //test78
 }
 
 export class HomePage extends BasePage {
