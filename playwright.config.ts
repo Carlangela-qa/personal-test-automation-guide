@@ -45,21 +45,45 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: process.env.url,
+    baseURL: process.env.UI_BASE_URL,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'off',
     headless: true,
-    screenshot: 'on',
-    video: 'on',
+    // screenshot: 'on',
+    // video: 'on',
   },
 
   /* Configure projects for major browsers */
   projects: [
+
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    }
+      name: 'API Tests',
+      testMatch: ['tests/api/**/*.spec.ts'],
+      use: {
+        baseURL: process.env.API_BASE_URL,
+        extraHTTPHeaders: {
+          'Content-Type': 'application/json',
+        },
+      },
+    },
+    {
+      name: 'UI Tests',
+      testMatch: ['tests/ui/**/*.spec.ts'],
+      use: {
+        baseURL: process.env.UI_BASE_URL,
+        extraHTTPHeaders: {
+          'Content-Type': 'application/json',
+        },
+      },
+    },
+    // {
+    //   name: 'chromium',
+    //   use: {
+    //     ...devices['Desktop Chrome'],
+    //     baseURL: process.env.UI_BASE_URL,
+    //   },
+    // }
 
     // {
     //   name: 'firefox',

@@ -1,0 +1,34 @@
+pipeline {
+  agent {
+    docker {
+      image 'mcr.microsoft.com/playwright:v1.45.0-focal'
+      args '-u root'
+    }
+  }
+  stages {
+    stage('Checkout') {
+      steps {
+        git branch: 'main', url: 'https://github.com/Carlangela-qa/personal-test-automation-guide.git'
+      }
+    }
+    stage('Install') {
+      steps {
+        sh 'npm ci'
+      }
+    }
+    stage('Test') {
+      steps {
+        sh 'npx playwright test --reporter=html'
+      }
+    }
+    stage('Publish Report') {
+      steps {
+        publishHTML(target: [
+          reportDir: 'playwright-report',
+          reportFiles: 'index.html',
+          reportName: 'Playwright Test Report'
+        ])
+      }
+    }
+  }
+}

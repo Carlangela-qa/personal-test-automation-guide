@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "This project is an automated testing framework built using [Playwright](https://playwright.dev/), leveraging modern design patterns for reliability and maintainability.",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "pw:install": "playwright install --with-deps",
+    "postinstall": "playwright install chromium"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
