@@ -9,8 +9,6 @@ test.describe('Login Tests', () => {
 
     for (const data of testData) {
 
-        // if (data.run !== 'yes') continue;
-
         test(`Login test for - ${data.email}`, async ({ pom }) => {
 
             test.skip(data.run !== 'yes');
