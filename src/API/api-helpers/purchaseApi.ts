@@ -2,6 +2,7 @@ import { APIRequestContext, expect } from "@playwright/test";
 import { endpoints } from "../api-helpers/manage/endpoints";
 import { BaseApi } from "./manage/baseApi";
 import { CartSchema, CartResponse } from "../schema-validators/getCartItemDetails";
+import { ProductListSchema } from "../schema-validators/productsResponseValidator";
 import * as path from "path";
 import fs from "fs";
 import { z } from "zod";
@@ -27,6 +28,13 @@ export class purchaseHelpers extends BaseApi {
     async getProducts() {
         const url = endpoints.purchaseE2e.products();
         const data = await this.getResponse(url, "get");
+
+
+        const result = ProductListSchema.safeParse(data);
+        if (!result.success) {
+            throw new Error(`Product list validation failed: ${result.error}`);
+        }
+
         return data;
     }
 

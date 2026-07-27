@@ -28,13 +28,13 @@ export default defineConfig({
     timeout: 180000,
   },
   /* Run tests in files in parallel */
-  fullyParallel: false,
+  fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: 1,
   /* Opt out of parallel tests on CI. */
-  workers: 1,
+  // workers: 1,
   //workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   // reporter: [
@@ -67,23 +67,20 @@ export default defineConfig({
         },
       },
     },
-    {
-      name: 'UI Tests',
-      testMatch: ['tests/ui/**/*.spec.ts'],
-      use: {
-        baseURL: process.env.UI_BASE_URL,
-        extraHTTPHeaders: {
-          'Content-Type': 'application/json',
-        },
-      },
-    },
     // {
-    //   name: 'chromium',
+    //   name: 'UI Tests',
+    //   testMatch: ['tests/ui/**/*.spec.ts'],
     //   use: {
-    //     ...devices['Desktop Chrome'],
     //     baseURL: process.env.UI_BASE_URL,
     //   },
-    // }
+    // },
+    {
+      name: 'UI - chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+        baseURL: process.env.UI_BASE_URL,
+      },
+    }
 
     // {
     //   name: 'firefox',
